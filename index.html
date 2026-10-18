@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quà 20/10 - Hội Bạn Thân</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    color: #60466e;
+    background: linear-gradient(135deg, #ffe0eb, #e5ddff, #fff0d8);
+}
+
+.card {
+    width: 100%;
+    max-width: 460px;
+    padding: 25px;
+    text-align: center;
+    background: #ffffffed;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px #a98bb933;
+}
+
+h1 {
+    color: #d4518b;
+}
+
+.subtitle {
+    line-height: 1.8;
+    color: #8b7196;
+}
+
+.gift {
+    font-size: 90px;
+    cursor: pointer;
+    margin: 20px;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+button {
+    padding: 12px 20px;
+    margin: 8px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #ed79a7, #a58ae8);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.poem {
+    display: none;
+    margin-top: 22px;
+    padding: 18px;
+    background: #fff1f7;
+    border: 1px dashed #e7a3c2;
+    border-radius: 18px;
+    line-height: 1.9;
+    animation: appear 0.6s ease;
+}
+
+.poem.show {
+    display: block;
+}
+
+.poem h2 {
+    color: #cf5d91;
+}
+
+.poem p {
+    white-space: normal;
+    line-height: 2;
+}
+
+footer {
+    margin-top: 22px;
+    font-size: 12px;
+    color: #a68cac;
+}
+
+#effects {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.confetti {
+    position: absolute;
+    top: -30px;
+    animation: fall 4s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="effects"></div>
+
+<div class="card">
+
+    <p>🌷 NGÀY PHỤ NỮ VIỆT NAM 🌷</p>
+
+    <h1>Chúc mừng 20/10!</h1>
+
+    <p class="subtitle">
+        Chúc hội chị em một ngày thật vui vẻ!<br>
+        Nhấn vào hộp quà để nhận bất ngờ nhé!
+    </p>
+
+    <div class="gift" onclick="openGift()">
+        🎁
+    </div>
+
+    <button onclick="openGift()">
+        MỞ QUÀ NGAY 🎉
+    </button>
+
+    <div class="poem" id="poem">
+
+        <h2>🌸 BÀI THƠ 20/10 🌸</h2>
+
+        <p>
+            Hôm nay mùng 20 tháng 10,<br>
+            Chúc cho các bạn vui tròn niềm vui.<br>
+            Nụ cười luôn nở trên môi,<br>
+            Học hành thuận lợi, điểm mười đầy tay.<br>
+            <br>
+            Chúc cho may mắn mỗi ngày,<br>
+            Tiền vô như nước, vận may ngập tràn.<br>
+            Bạn bè tình nghĩa chứa chan,<br>
+            Cùng nhau lưu giữ muôn vàn niềm vui.<br>
+            <br>
+            Chúc cho cuộc sống thảnh thơi,<br>
+            Ngày nào cũng đẹp, rạng ngời thanh xuân! 🎉
+        </p>
+
+        <h2>🎊 LỜI CHÚC ĐẶC BIỆT 🎊</h2>
+
+        <p id="wish">
+            Chúc các bà luôn xinh đẹp, vui vẻ,
+            học giỏi, nhiều tiền và gặp toàn chuyện tốt!
+            <br><br>
+            Chúc 20/10 nhận thật nhiều quà,
+            cười thật nhiều và luôn tự tin là chính mình! 😎
+        </p>
+
+        <button onclick="changeWish()">
+            Đổi lời chúc 🎲
+        </button>
+
+        <button onclick="celebrate()">
+            Bắn pháo giấy 🎉
+        </button>
+
+    </div>
+
+    <footer>
+        Một món quà nhỏ từ đứa bạn cùng hội 😎
+    </footer>
+
+</div>
+
+<script>
+function openGift() {
+    document.getElementById("poem").classList.add("show");
+    celebrate();
+}
+
+const wishes = [
+    "Chúc các bà xinh đẹp, học giỏi, thi đâu đậu đó! 📚",
+    "Chúc hội chị em tiền vào như nước, bài tập ít như mơ! 💸",
+    "Chúc luôn vui vẻ, không deadline dí, không bài khó hành! 😂",
+    "Chúc ăn ngon không béo, ngủ ngon không muộn, đi học không trễ! 😎",
+    "Chúc mọi người gặp nhiều may mắn và thành công! 🌷",
+    "Chúc 20/10 nhận nhiều quà, ngày nào cũng vui như Tết! 🎁"
+];
+
+function changeWish() {
+    let random = Math.floor(Math.random() * wishes.length);
+
+    document.getElementById("wish").textContent = wishes[random];
+}
+
+function celebrate() {
+    const area = document.getElementById("effects");
+    const symbols = ["🎉", "🌸", "🎊", "✨", "🌷", "⭐"];
+
+    for (let i = 0; i < 40; i++) {
+        const item = document.createElement("span");
+
+        item.className = "confetti";
+        item.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        item.style.left = Math.random() * 100 + "%";
+        item.style.fontSize = (15 + Math.random() * 20) + "px";
+        item.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+        area.appendChild(item);
+
+        setTimeout(function() {
+            item.remove();
+        }, 5500);
+    }
+}
+</script>
+
+</body>
+</html>
