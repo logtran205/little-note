@@ -381,7 +381,10 @@ footer {
 </head>
 
 <body>
-
+    <audio id="bgMusic" loop>
+  <source src="nhac.mp3" type="audio/mpeg">
+</audio>
+    
 <div id="effects"></div>
 
 <!-- WEBSITE 20/10 CŨ -->
@@ -495,8 +498,10 @@ footer {
 
 <script>
 function openGift() {
-    document.getElementById("poem").classList.add("show");
-    celebrate();
+  document.getElementById("bgMusic").play().catch(() => {});
+
+  document.getElementById("poem").classList.add("show");
+  celebrate();
 }
 
 const wishes = [
