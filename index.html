@@ -2,336 +2,577 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Một chút bất ngờ 💗</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quà 20/10 - Hội Bạn Thân</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fff0f6, #ffe0ed, #f5e5ff);
-      color: #87466a;
-      text-align: center;
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    color: #60466e;
+    background: linear-gradient(135deg, #ffe0eb, #e5ddff, #fff0d8);
+}
+
+.card {
+    width: 100%;
+    max-width: 460px;
+    padding: 25px;
+    text-align: center;
+    background: #ffffffed;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px #a98bb933;
+}
+
+h1 {
+    color: #d4518b;
+}
+
+.subtitle {
+    line-height: 1.8;
+    color: #8b7196;
+}
+
+.gift {
+    font-size: 90px;
+    cursor: pointer;
+    margin: 20px;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+button {
+    padding: 12px 20px;
+    margin: 8px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #ed79a7, #a58ae8);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.poem {
+    display: none;
+    margin-top: 22px;
+    padding: 18px;
+    background: #fff1f7;
+    border: 1px dashed #e7a3c2;
+    border-radius: 18px;
+    line-height: 1.9;
+    animation: appear 0.6s ease;
+}
+
+.poem.show {
+    display: block;
+}
+
+.poem h2 {
+    color: #cf5d91;
+}
+
+.poem p {
+    white-space: normal;
+    line-height: 2;
+}
+
+footer {
+    margin-top: 22px;
+    font-size: 12px;
+    color: #a68cac;
+}
+
+/* PHÁO GIẤY */
+#effects {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.confetti {
+    position: absolute;
+    top: -30px;
+    animation: fall 4s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MÀN HÌNH BẤT NGỜ */
+.flower-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 58px 20px 25px;
+    overflow-y: auto;
+    background:
+        radial-gradient(ellipse at center, #381329 0%, #160a15 55%, #050405 100%);
+    color: white;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+.flower-screen.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* ÁNH SÁNG HỒNG */
+.flower-light {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: #ff65b5;
+    filter: blur(100px);
+    opacity: 0.22;
+    pointer-events: none;
+}
+
+/* ẢNH BÓ HOA */
+.flower-bouquet {
+    position: relative;
+    z-index: 1;
+    width: min(390px, 100%);
+    flex-shrink: 0;
+    opacity: 0;
+    transform: scale(0.12) translateY(35px);
+}
+
+.bouquet-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 53vh;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 18px;
+    filter: drop-shadow(0 0 24px #ff85bd55);
+}
+
+.flower-screen.active .flower-bouquet {
+    animation: bouquetBloom 1.35s 0.2s cubic-bezier(.2,.8,.3,1.25) forwards;
+}
+
+/* LỜI CHÚC */
+.flower-title {
+    position: relative;
+    z-index: 1;
+    color: #ffb8d8;
+    font-size: clamp(22px, 5.5vw, 30px);
+    line-height: 1.45;
+    margin: 22px 0 8px;
+    text-shadow: 0 0 18px #ff73b9aa;
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.flower-message {
+    position: relative;
+    z-index: 1;
+    width: min(440px, 100%);
+    color: #ffe4f0;
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 5px auto;
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.flower-screen.active .flower-title {
+    animation: messageAppear 0.8s 1.25s forwards;
+}
+
+.flower-screen.active .flower-message {
+    animation: messageAppear 0.8s 1.55s forwards;
+}
+
+/* NÚT X ĐÓNG Ở GÓC */
+.flower-close {
+    position: absolute;
+    z-index: 5;
+    top: 15px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ff9dca;
+    border-radius: 50%;
+    background: #ffffff18;
+    color: white;
+    font-size: 27px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px #ff8ac944;
+}
+
+.flower-close:hover {
+    background: #ff8abd44;
+}
+
+/* CÁNH HOA VÀ TRÁI TIM BAY */
+.floating-heart {
+    position: absolute;
+    bottom: -35px;
+    z-index: 2;
+    pointer-events: none;
+    animation: heartRise 4.5s linear forwards;
+}
+
+@keyframes bouquetBloom {
+    0% {
+        opacity: 0;
+        transform: scale(0.12) translateY(35px);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.035) translateY(-3px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes messageAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heartRise {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0);
+    }
+    15% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-110vh) rotate(40deg);
+    }
+}
+
+/* TỐI ƯU CHO ĐIỆN THOẠI */
+@media (max-width: 480px) {
+    .card {
+        padding: 22px 16px;
     }
 
-    .main {
-      min-height: 100vh;
-      padding: 55px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    .flower-screen {
+        padding: 58px 17px 22px;
     }
 
-    h1 {
-      color: #e15b98;
-      font-size: clamp(26px, 6vw, 38px);
+    .bouquet-image {
+        max-height: 45vh;
     }
 
-    .intro {
-      max-width: 420px;
-      line-height: 1.8;
-      font-size: 16px;
+    .flower-title {
+        margin-top: 18px;
     }
 
-    .gift {
-      font-size: 85px;
-      margin: 15px 0;
-      animation: float 2s ease-in-out infinite;
+    .flower-message {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+}
+
+@media (max-height: 650px) {
+    .flower-screen {
+        justify-content: flex-start;
     }
 
-    .main-button {
-      border: none;
-      border-radius: 30px;
-      padding: 15px 26px;
-      margin-top: 18px;
-      background: linear-gradient(110deg, #ec6ca7, #a77bea);
-      color: white;
-      font-size: 17px;
-      cursor: pointer;
-      box-shadow: 0 7px 20px #d879ad55;
-      transition: transform .2s;
+    .bouquet-image {
+        max-height: 38vh;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gift,
+    .flower-screen.active .flower-bouquet,
+    .flower-screen.active .flower-title,
+    .flower-screen.active .flower-message {
+        animation: none;
     }
 
-    .main-button:active {
-      transform: scale(.95);
-    }
-
-    .surprise {
-      position: fixed;
-      inset: 0;
-      z-index: 10;
-      padding: 24px 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-y: auto;
-      background: radial-gradient(ellipse at center, #371329, #100711 75%);
-      color: white;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity .9s ease, visibility .9s;
-    }
-
-    .surprise.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .glow {
-      position: absolute;
-      width: 230px;
-      height: 230px;
-      border-radius: 50%;
-      background: #ff65b522;
-      filter: blur(35px);
-      pointer-events: none;
-    }
-
-    .bouquet {
-      position: relative;
-      z-index: 1;
-      width: min(340px, 95vw);
-      opacity: 0;
-      transform: scale(.05) translateY(35px);
-    }
-
-    .surprise.active .bouquet {
-      animation: bloom 1.5s .25s cubic-bezier(.2,.8,.3,1.3) forwards;
-    }
-
-    .flower-row {
-      position: relative;
-      z-index: 1;
-      font-size: clamp(30px, 8vw, 48px);
-      line-height: 1.4;
-      letter-spacing: -5px;
-      filter: drop-shadow(0 0 9px #ff75bb66);
-    }
-
-    .flower-row:nth-child(2) {
-      margin-top: -5px;
-    }
-
-    .stems {
-      font-size: 37px;
-      margin-top: -2px;
-    }
-
-    .wrapper {
-      width: 145px;
-      height: 100px;
-      margin: -3px auto 0;
-      position: relative;
-      background: linear-gradient(135deg, #ffe4ef, #f69bc2, #ffd6e7);
-      clip-path: polygon(5% 0, 95% 0, 72% 100%, 28% 100%);
-      filter: drop-shadow(0 5px 8px #ff76bd55);
-    }
-
-    .wrapper::after {
-      content: "♡";
-      position: absolute;
-      top: 20px;
-      left: 58px;
-      color: #d94385;
-      font-size: 32px;
-    }
-
-    .ribbon {
-      position: relative;
-      margin-top: -45px;
-      font-size: 30px;
-    }
-
-    .message-title {
-      color: #ffb8d8;
-      font-size: clamp(22px, 5vw, 29px);
-      margin: 30px 0 10px;
-      opacity: 0;
-    }
-
-    .message {
-      max-width: 430px;
-      color: #ffe2ee;
-      font-size: 16px;
-      line-height: 1.9;
-      margin: 5px auto;
-      opacity: 0;
-      transform: translateY(15px);
-    }
-
-    .surprise.active .message-title {
-      animation: fadeUp .8s 1.35s forwards;
-    }
-
-    .surprise.active .message {
-      animation: fadeUp .9s 1.65s forwards;
-    }
-
-    .close-button {
-      margin-top: 22px;
-      padding: 11px 23px;
-      border-radius: 24px;
-      border: 1px solid #ffb8d8;
-      color: white;
-      background: #ffffff15;
-      font-size: 15px;
-      cursor: pointer;
-      opacity: 0;
-    }
-
-    .surprise.active .close-button {
-      animation: fadeUp .8s 2s forwards;
-    }
-
-    .heart {
-      position: absolute;
-      bottom: -30px;
-      font-size: 22px;
-      pointer-events: none;
-      animation: rise 4s linear forwards;
-    }
-
-    @keyframes bloom {
-      0% { opacity: 0; transform: scale(.05) translateY(35px); }
-      70% { opacity: 1; transform: scale(1.08) translateY(-4px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-9px); }
-    }
-
-    @keyframes rise {
-      from { transform: translateY(0) rotate(0); opacity: 0; }
-      15% { opacity: .9; }
-      to { transform: translateY(-110vh) rotate(30deg); opacity: 0; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-      }
-
-      .surprise.active .bouquet,
-      .surprise.active .message-title,
-      .surprise.active .message,
-      .surprise.active .close-button {
+    .flower-screen.active .flower-bouquet,
+    .flower-screen.active .flower-title,
+    .flower-screen.active .flower-message {
         opacity: 1;
         transform: none;
-      }
     }
-  </style>
+}
+</style>
 </head>
 
 <body>
-  <main class="main">
-    <div class="gift">🎁</div>
 
-    <h1>Một món quà nhỏ 💗</h1>
+<div id="effects"></div>
 
-    <p class="intro">
-      Có một điều dễ thương đang chờ bạn.
-      Bấm vào nút bên dưới để khám phá nhé! ✨
+<!-- WEBSITE 20/10 CŨ -->
+<div class="card">
+
+    <p>🌷 NGÀY PHỤ NỮ VIỆT NAM 🌷</p>
+
+    <h1>Chúc mừng 20/10!</h1>
+
+    <p class="subtitle">
+        Chúc hội chị em một ngày thật vui vẻ!<br>
+        Nhấn vào hộp quà để nhận bất ngờ nhé!
     </p>
 
-    <button class="main-button" onclick="openSurprise()">
-      Bí mật dành cho bạn ✨
-    </button>
-  </main>
-
-  <section
-    id="surprise"
-    class="surprise"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Bất ngờ dành cho bạn"
-    aria-hidden="true"
-  >
-    <div class="glow"></div>
-
-    <div class="bouquet">
-      <div class="flower-row">🌸 🌹 🌸</div>
-      <div class="flower-row">🌹 🌹 🌹 🌹</div>
-      <div class="flower-row">🌹 🌹 🌹 🌹 🌹</div>
-      <div class="stems">🌿 🌿 🌿</div>
-      <div class="wrapper"></div>
-      <div class="ribbon">🎀</div>
+    <div class="gift" onclick="openGift()">
+        🎁
     </div>
 
-    <h2 class="message-title">Một bó hoa dành tặng bạn 🌹</h2>
-
-    <p class="message">
-      Chúc bạn luôn xinh đẹp, vui vẻ và gặp thật nhiều
-      điều dịu dàng trong cuộc sống.<br>
-      Mong bó hoa nhỏ này sẽ khiến hôm nay của bạn
-      vui hơn một chút! 💗<br><br>
-      <strong>Chúc bạn một ngày thật rạng rỡ nhé! 🌷</strong>
-    </p>
-
-    <button class="close-button" onclick="closeSurprise()">
-      Quay lại 💕
+    <button onclick="openGift()">
+        MỞ QUÀ NGAY 🎉
     </button>
-  </section>
 
-  <script>
-    let heartTimer;
+    <div class="poem" id="poem">
 
-    function openSurprise() {
-      const screen = document.getElementById("surprise");
-      screen.classList.add("active");
-      screen.setAttribute("aria-hidden", "false");
+        <h2>🌸 BÀI THƠ 20/10 🌸</h2>
 
-      clearInterval(heartTimer);
-      heartTimer = setInterval(createHeart, 350);
+        <p>
+            Hôm nay mùng 20 tháng 10,<br>
+            Chúc cho các bạn vui tròn niềm vui.<br>
+            Nụ cười luôn nở trên môi,<br>
+            Học hành thuận lợi, điểm mười đầy tay.<br>
+            <br>
+            Chúc cho may mắn mỗi ngày,<br>
+            Tiền vô như nước, vận may ngập tràn.<br>
+            Bạn bè tình nghĩa chứa chan,<br>
+            Cùng nhau lưu giữ muôn vàn niềm vui.<br>
+            <br>
+            Chúc cho cuộc sống thảnh thơi,<br>
+            Ngày nào cũng đẹp, rạng ngời thanh xuân! 🎉
+        </p>
 
-      for (let i = 0; i < 8; i++) {
-        setTimeout(createHeart, i * 120);
-      }
+        <h2>🎊 LỜI CHÚC ĐẶC BIỆT 🎊</h2>
+
+        <p id="wish">
+            Chúc các bà luôn xinh đẹp, vui vẻ,
+            học giỏi, nhiều tiền và gặp toàn chuyện tốt!
+            <br><br>
+            Chúc 20/10 nhận thật nhiều quà,
+            cười thật nhiều và luôn tự tin là chính mình! 😎
+        </p>
+
+        <button onclick="changeWish()">
+            Đổi lời chúc 🎲
+        </button>
+
+        <button onclick="openFlowerSurprise()">
+            Bí mật dành cho bạn ✨
+        </button>
+
+    </div>
+
+    <footer>
+        Một món quà nhỏ từ đứa bạn cùng hội 😎
+    </footer>
+
+</div>
+
+<!-- MÀN HÌNH BÓ HOA -->
+<section
+    id="flowerScreen"
+    class="flower-screen"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-label="Bất ngờ dành cho bạn"
+>
+    <div class="flower-light"></div>
+
+    <button
+        class="flower-close"
+        onclick="closeFlowerSurprise()"
+        aria-label="Đóng màn hình bất ngờ"
+        title="Đóng"
+    >×</button>
+
+    <div class="flower-bouquet">
+        <img
+            src="bouquet.png"
+            alt="Bó hoa hồng hồng giấy gói pastel và nơ satin"
+            class="bouquet-image"
+        >
+    </div>
+
+    <h2 class="flower-title">
+        Một bó hoa dành tặng bạn 💗
+    </h2>
+
+    <p class="flower-message">
+        Chúc bạn luôn xinh đẹp, vui vẻ và gặp thật nhiều
+        điều dịu dàng trong cuộc sống.<br>
+        Mong bó hoa nhỏ này sẽ khiến hôm nay của bạn
+        vui hơn một chút! 💗<br><br>
+        <strong>
+            Chúc bạn luôn rạng rỡ, may mắn và hạnh phúc
+            theo cách riêng của mình nhé! 🌷
+        </strong>
+    </p>
+</section>
+
+<script>
+function openGift() {
+    document.getElementById("poem").classList.add("show");
+    celebrate();
+}
+
+const wishes = [
+    "Chúc các bà xinh đẹp, học giỏi, thi đâu đậu đó! 📚",
+    "Chúc hội chị em tiền vào như nước, bài tập ít như mơ! 💸",
+    "Chúc luôn vui vẻ, không deadline dí, không bài khó hành! 😂",
+    "Chúc ăn ngon không béo, ngủ ngon không muộn, đi học không trễ! 😎",
+    "Chúc mọi người gặp nhiều may mắn và thành công! 🌷",
+    "Chúc 20/10 nhận nhiều quà, ngày nào cũng vui như Tết! 🎁"
+];
+
+function changeWish() {
+    const random = Math.floor(Math.random() * wishes.length);
+    document.getElementById("wish").textContent = wishes[random];
+}
+
+function celebrate() {
+    const area = document.getElementById("effects");
+    const symbols = ["🎉", "🌸", "🎊", "✨", "🌷", "⭐"];
+
+    for (let i = 0; i < 40; i++) {
+        const item = document.createElement("span");
+
+        item.className = "confetti";
+        item.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        item.style.left = Math.random() * 100 + "%";
+        item.style.fontSize = (15 + Math.random() * 20) + "px";
+        item.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+        area.appendChild(item);
+
+        setTimeout(function() {
+            item.remove();
+        }, 5500);
+    }
+}
+
+/* MỞ MÀN HÌNH BẤT NGỜ */
+let heartTimer = null;
+
+function openFlowerSurprise() {
+    const screen = document.getElementById("flowerScreen");
+
+    screen.classList.add("active");
+    screen.setAttribute("aria-hidden", "false");
+
+    clearInterval(heartTimer);
+
+    for (let i = 0; i < 10; i++) {
+        setTimeout(createFloatingHeart, i * 130);
     }
 
-    function closeSurprise() {
-      const screen = document.getElementById("surprise");
-      screen.classList.remove("active");
-      screen.setAttribute("aria-hidden", "true");
-      clearInterval(heartTimer);
+    heartTimer = setInterval(createFloatingHeart, 450);
+}
 
-      screen.querySelectorAll(".heart").forEach(heart => heart.remove());
-    }
+/* TRÁI TIM VÀ CÁNH HOA BAY */
+function createFloatingHeart() {
+    const screen = document.getElementById("flowerScreen");
 
-    function createHeart() {
-      const screen = document.getElementById("surprise");
-
-      if (!screen.classList.contains("active")) {
+    if (!screen.classList.contains("active")) {
         clearInterval(heartTimer);
         return;
-      }
-
-      const heart = document.createElement("span");
-      heart.className = "heart";
-      heart.textContent = ["💗", "💕", "🌸", "✨"][Math.floor(Math.random() * 4)];
-      heart.style.left = Math.random() * 95 + "%";
-      heart.style.animationDuration = (3 + Math.random() * 2) + "s";
-
-      screen.appendChild(heart);
-      setTimeout(() => heart.remove(), 5200);
     }
 
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape") closeSurprise();
+    const heart = document.createElement("span");
+    heart.className = "floating-heart";
+
+    const symbols = ["💗", "💕", "🌸", "✨", "🌷"];
+    heart.textContent =
+        symbols[Math.floor(Math.random() * symbols.length)];
+
+    heart.style.left = Math.random() * 95 + "%";
+    heart.style.fontSize = (16 + Math.random() * 15) + "px";
+    heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+
+    screen.appendChild(heart);
+
+    setTimeout(function() {
+        heart.remove();
+    }, 5500);
+}
+
+/* ĐÓNG BẰNG NÚT X */
+function closeFlowerSurprise() {
+    const screen = document.getElementById("flowerScreen");
+
+    screen.classList.remove("active");
+    screen.setAttribute("aria-hidden", "true");
+
+    clearInterval(heartTimer);
+
+    screen.querySelectorAll(".floating-heart").forEach(function(heart) {
+        heart.remove();
     });
-  </script>
+}
+
+/* ĐÓNG BẰNG PHÍM ESC TRÊN MÁY TÍNH */
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeFlowerSurprise();
+    }
+});
+</script>
+
 </body>
 </html>
