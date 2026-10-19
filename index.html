@@ -498,7 +498,11 @@ footer {
 
 <script>
 function openGift() {
-  document.getElementById("bgMusic").play().catch(() => {});
+const music = document.getElementById("bgMusic");
+music.volume = 0.7;
+music.play().catch(error => {
+  alert("Không phát được nhạc: " + error.message);
+});
 
   document.getElementById("poem").classList.add("show");
   celebrate();
